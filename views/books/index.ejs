@@ -1,0 +1,33 @@
+<% include ../partials/header.ejs %>
+
+<h1>Books</h1>
+
+<% if (user) { %>
+    <a href="/books/add">Add a New Book</a>
+<% } %>
+
+<table class="table table-striped table-hover">
+    <tr><th>Title</th><th>Author</th><th>Price</th><th>Year</th>
+    <% if (user) { %>
+        <th>Actions</th>
+    <% } %>
+    </tr>
+
+    <% for (var i = 0; i < books.length; i++) { %>
+        <tr>
+            <td><%= books[i].title %></td>
+            <td><%= books[i].author %></td>
+            <td><%= books[i].price %></td>
+            <td><%= books[i].year %></td>
+            <% if (user) { %>
+                <td>
+                    <a href="/books/<%= books[i]._id %>" class="btn btn-info">Edit</a>
+                    <a href="/books/delete/<%= books[i]._id %>" class="btn btn-danger confirmation">Delete</a>
+                </td>
+            <% } %>
+        </tr>
+    <% } %>
+
+</table>
+
+<% include ../partials/footer.ejs %>
